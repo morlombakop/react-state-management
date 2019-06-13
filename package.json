@@ -4,14 +4,19 @@
   "description": "react state management library written with typescript",
   "repository": {
     "type": "git",
-    "url": "https://github.com/morlombakop/typescript-react-google-map.git"
+    "url": "https://github.com/morlombakop/react-state-management.git"
   },
   "author": "Morlo Mbakop",
   "license": "UNLICENSED",
   "main": "src/index.tsx",
   "scripts": {
-    "start:server": "node server",
-    "start": "parcel ./src/index.html"
+    "develop": "concurrently -r \"npm:type-check:watch\" \"npm:start\"",
+    "prettify": "prettier --write './src/**/*.{ts,tsx}'",
+    "build": "npm run type-check && parcel build ./src/index.html --public-url '/'",
+    "start": "parcel ./src/index.html",
+    "test": "jest --no-cache",
+    "type-check": "tsc --noEmit",
+    "type-check:watch": "tsc --noEmit --watch"
   },
   "engines": {
     "node": ">= 8.11.0",

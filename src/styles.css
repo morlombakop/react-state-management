@@ -7,9 +7,9 @@
 }
 
 body {
-  font-family: 'Helvetica', 'Arial', sans-serif;
-  background-color: '#f2f2f2';
-  color: '#444444';
+  font-family: "Helvetica", "Arial", sans-serif;
+  background-color: #ebebeb;
+  color: #444444;
   height: 100%;
   width: 100%;
 }
@@ -17,6 +17,17 @@ body {
 .wrapper {
   max-width: 800px;
   padding: 15px 10px;
-  display:block;
-  margin:0 auto;
+  display: block;
+  margin: 0 auto;
+  background: white;
+}
+
+strong {
+  font-weight: 500;
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 24px;
+  margin-top: 0 !important;
 }

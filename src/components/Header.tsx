@@ -13,7 +13,7 @@ const Header: React.FC = () => {
         padding: 0px 10px;
         text-decoration: none;
         color: #d0d0d0;
-        &:hover{
+        &:hover {
           color: #ffffff;
         }
       }

@@ -1,17 +1,22 @@
 import * as React from 'react'
+import { random } from 'faker'
 import Incident from '../components/Incident'
+// @ts-ignore
+import { connect } from '../../lib/create-store'
+import { IIncidentProps, IHome } from '../types/PropTypes'
 
-const Home: React.FC = () => {
-  return (
-    <div className="wrapper">
-      <Incident title="Test incident" assignee="Foo" status="Resolved" />
+const Home: React.FC<IHome> = ({ incidents }) => (
+  <div className="wrapper">
+    {incidents.map(incident => (
       <Incident
-        title="Another incident"
-        assignee="Bar"
-        status="Acknowledged"
+        key={random.uuid()}
+        title={incident.title}
+        assignee={incident.assignee}
+        status={incident.status}
       />
-    </div>
-  )
-}
+    ))}
+  </div>
+)
 
-export default Home
+const mapStateToProps = (state: IIncidentProps[]) => ({ incidents: state })
+export default connect(mapStateToProps)(Home)

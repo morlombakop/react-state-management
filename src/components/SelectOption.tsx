@@ -1,4 +1,5 @@
 import * as React from 'react'
+import styled, { css } from 'styled-components'
 import { ISelectOptionProps } from '../types/PropTypes'
 
 const SelectOption: React.FC<ISelectOptionProps> = ({
@@ -21,21 +22,45 @@ const SelectOption: React.FC<ISelectOptionProps> = ({
   const handleLoseFocus = ({ target }: React.FocusEvent<HTMLSelectElement>) =>
     baseHandler(target.value)
 
+  const SelectContainer = styled.div`
+    box-sizing: border-box;
+    select {
+      display: inline-block;
+      width: 100%;
+      padding: 0.375rem 1.75rem 0.375rem 0.75rem;
+      color: #7b8a8b;
+      vertical-align: middle;
+      border: 1px solid #ced4da;
+      border-radius: 0.25rem;
+      ${!isValid(value) &&
+        css`
+          border: 1px solid red;
+        `}
+    }
+    span {
+      color: red;
+    }
+  `
+
   return (
-    <select
-      value={value}
-      name={name}
-      data-testid="select-option"
-      onChange={handleChange}
-      onBlur={handleLoseFocus}
-    >
-      <option value="" disabled={true} hidden={true}>
-        Select
-      </option>
-      {options.map(value => (
-        <option key={value}>{value}</option>
-      ))}
-    </select>
+    <SelectContainer>
+      <strong>{label}</strong>
+      <select
+        value={value}
+        name={name}
+        data-testid="select-option"
+        onChange={handleChange}
+        onBlur={handleLoseFocus}
+      >
+        <option value="" disabled={true} hidden={true}>
+          Select
+        </option>
+        {options.map(value => (
+          <option key={value}>{value}</option>
+        ))}
+      </select>
+      {!isValid(value) && <span>{error}</span>}
+    </SelectContainer>
   )
 }
 
