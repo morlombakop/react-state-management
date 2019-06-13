@@ -3,9 +3,19 @@ import Incident from '../components/Incident'
 
 const Home: React.FC = () => {
   return (
-    <div>
-      <Incident title="Test incident" assignee={{ id: 'eddfg', name: 'barr' }} status="Resolved" />
-      <Incident title="Another incident" assignee={{ id: 'eddfg', name: 'barr' }} status="Acknowledged" />
+    <div className="wrapper">
+      <div className="content">
+        <Incident
+          title="Test incident"
+          assignee={{ id: 'eddfg', name: 'barr' }}
+          status="Resolved"
+        />
+        <Incident
+          title="Another incident"
+          assignee={{ id: 'eddfg', name: 'barr' }}
+          status="Acknowledged"
+        />
+      </div>
     </div>
   )
 }
