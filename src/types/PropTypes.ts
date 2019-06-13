@@ -1,9 +1,9 @@
 import { Employee } from "./DomainTypes";
 
 export interface BaseInputProps {
-  onChange: (value: string) => void
+  onChange: (value: string, name: string) => void
   value: string
-  id: string
+  name: string
   // isValid: boolean
   label: string
   error: string

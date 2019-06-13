@@ -1,7 +1,7 @@
 import React    from 'react'
 import { Link } from 'react-router-dom'
 
-export function Header () {
+const Header: React.FC = () => {
   return (
     <ul>
       <li>
@@ -15,3 +15,5 @@ export function Header () {
     </ul>
   )
 }
+
+export default Header

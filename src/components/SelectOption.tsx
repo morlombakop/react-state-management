@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { ISelectOptionProps } from '../types/PropTypes';
 
-const SelectOption: React.FC<ISelectOptionProps> = ({ title, assignee, status }) => (
-  <div style={{ border: '1px solid black' }}>
-    <p>{title}</p>
-    <p>Assignee: {assignee.name}</p>
-    <p>Status: {status}</p>
-  </div>
+const SelectOption: React.FC<ISelectOptionProps> = ({ onChange, value, name, label, error}) => (
+  <select>
+    <option>Hello</option>
+    <option>Hello 1</option>
+    <option>Hello 2</option>
+  </select>
 )
 
 export default SelectOption

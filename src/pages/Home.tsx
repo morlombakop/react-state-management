@@ -1,19 +1,13 @@
-import React        from 'react'
+import * as React from 'react'
 import Incident from '../components/Incident'
 
-export function Home () {
+const Home: React.FC = () => {
   return (
     <div>
-      <Incident
-        title="Test incident"
-        assignee="Admin"
-        status="Resolved"
-      />
-      <Incident
-        title="Another incident"
-        assignee="Engineer"
-        status="Acknowledged"
-      />
+      <Incident title="Test incident" assignee={{ id: 'eddfg', name: 'barr' }} status="Resolved" />
+      <Incident title="Another incident" assignee={{ id: 'eddfg', name: 'barr' }} status="Acknowledged" />
     </div>
   )
 }
+
+export default Home

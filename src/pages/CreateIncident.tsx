@@ -1,7 +1,12 @@
-import React from 'react'
+import * as React from 'react'
 
-export function CreateIncident () {
-  return (
-    <p>Create Incident form should be here</p>
-  )
+class CreateIncident extends React.PureComponent<{}, {}> {
+
+  render(){
+    return (
+      <p>Create Incident form should be here</p>
+    )
+  }
 }
+
+export default CreateIncident
