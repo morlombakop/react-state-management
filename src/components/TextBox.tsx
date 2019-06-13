@@ -3,13 +3,10 @@ import styled from 'styled-components'
 import { ITextBoxPops } from '../types/PropTypes';
 
 const TextBox: React.FC<ITextBoxPops> = ({ onChange, value, name, label, error, placeholder }) => {
-  // const [isValid, setValidity] = React.useState<boolean>(false)
-  // const [className, setClassName] = React.useState<string>('input')
-
   const isValid = (currentValue: string) => currentValue && currentValue.length > 5
   const baseHandler = (inputValue: string) => {
     if (isValid(inputValue)) {
-      onChange(value, name)
+      onChange(inputValue, name)
     }
   }
 

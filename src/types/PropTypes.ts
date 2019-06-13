@@ -1,10 +1,6 @@
-import { Employee } from "./DomainTypes";
-
 export interface BaseInputProps {
   onChange: (value: string, name: string) => void
-  value: string
   name: string
-  // isValid: boolean
   label: string
   error: string
   placeholder: string
@@ -12,14 +8,16 @@ export interface BaseInputProps {
 
 export interface ITextBoxPops extends BaseInputProps {
   placeholder: string
+  value: string
 }
 
 export interface ISelectOptionProps extends BaseInputProps {
-  options: string[] | Employee []
+  options: string[]
+  value: string
 }
 
 export interface IIncidentProps {
   title: string
-  assignee: Employee
+  assignee: string
   status: string
 }
