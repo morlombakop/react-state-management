@@ -12,6 +12,7 @@ body {
   color: #444444;
   height: 100%;
   width: 100%;
+  font-size: 16px;
 }
 
 .wrapper {
@@ -30,4 +31,5 @@ h1 {
   font-weight: 600;
   font-size: 24px;
   margin-top: 0 !important;
+  margin-bottom: 15px;
 }

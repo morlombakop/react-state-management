@@ -26,10 +26,10 @@ const TextBox: React.FC<ITextBoxPops> = ({ onChange, value, name, label, error, 
     background: #ffffff;
     box-sizing: border-box;
     input {
-      padding: 0.4rem 0.75rem;
-      color: #7b8a8b;
+      padding: 0.5rem 0.75rem;
       border: 1px solid #ced4da;
       border-radius: 0.25rem;
+      font-size: 1rem;
       ${!isValid(value) &&
         css`
           border: 1px solid red;
@@ -37,6 +37,11 @@ const TextBox: React.FC<ITextBoxPops> = ({ onChange, value, name, label, error, 
     }
     span {
       color: red;
+      font-size: 0.8rem;
+    }
+
+    strong {
+      font-size: 0.85rem;
     }
   `
 

@@ -18,7 +18,9 @@ const Fieldset = styled.fieldset`
     border-color: transparent;
     line-height: 1.5;
     border-radius: 0.25rem;
-    padding: 0.375rem 0.75rem;
+    padding: 0.4rem 0.75rem;
+    font-size: 1rem;
+    cursor: not-allowed;
     &:not(:disabled) {
       cursor: pointer;
       background-color: #18bc9c;

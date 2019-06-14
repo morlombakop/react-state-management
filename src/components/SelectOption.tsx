@@ -27,11 +27,10 @@ const SelectOption: React.FC<ISelectOptionProps> = ({
     select {
       display: inline-block;
       width: 100%;
-      padding: 0.375rem 1.75rem 0.375rem 0.75rem;
-      color: #7b8a8b;
+      padding: 0.5rem 1.75rem 0.5rem 0.75rem;
       vertical-align: middle;
       border: 1px solid #ced4da;
-      border-radius: 0.25rem;
+      font-size: 1rem;
       background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e")
         no-repeat right 0.75rem center/8px 10px;
       ${!isValid(value) &&
@@ -46,6 +45,7 @@ const SelectOption: React.FC<ISelectOptionProps> = ({
     }
     span {
       color: red;
+      font-size: 0.8rem;
     }
   `
 
