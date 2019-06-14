@@ -56,10 +56,10 @@ class CreateIncident extends React.PureComponent<ICreateIncident, IIncidentProps
           <h1>Create New Incident</h1>
           <TextBox
             onChange={this.handleInputChange}
-            placeholder={'placeholder'}
+            placeholder="Enter incident title"
             value={this.state.title}
             name="title"
-            label={'Title'}
+            label="Title"
             error="Title is required and must be at least 5 characters"
           />
           <SelectOption
@@ -78,16 +78,11 @@ class CreateIncident extends React.PureComponent<ICreateIncident, IIncidentProps
             error="Title is required "
             options={incidentStatuses}
           />
-            <input
-              value="Create"
-              disabled={!this.isValid()}
-              type="submit"
-              title="Create Incident"
-            />
+          <input value="Create" disabled={!this.isValid()} type="submit" title="Create Incident" />
         </Fieldset>
       </form>
     )
   }
 }
 
-export default CreateIncident;
+export default CreateIncident

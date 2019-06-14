@@ -21,7 +21,7 @@ const Header: React.FC = () => {
   `
 
   return (
-    <NavBar>
+    <NavBar data-testid="header-container">
       <ul>
         <li>
           <Link to="/">Home</Link>

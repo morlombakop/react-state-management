@@ -1,4 +1,3 @@
-
 // @ts-ignore
 import { connect } from '../../lib/create-store'
 import { IIncidentProps } from '../types/PropTypes'

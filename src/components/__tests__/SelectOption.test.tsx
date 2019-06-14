@@ -32,11 +32,10 @@ describe('SelectOption component tests', () => {
     expect(SelectContainer).toHaveStyle(`
       display: inline-block;
       width: 100%;
-      padding: 0.375rem 1.75rem 0.375rem 0.75rem;
-      color: #7b8a8b;
+      padding: 0.5rem 1.75rem 0.5rem 0.75rem;
       vertical-align: middle;
       border: 1px solid #ced4da;
-      border-radius: 0.25rem;
+      font-size: 1rem;
     `)
   })
 })

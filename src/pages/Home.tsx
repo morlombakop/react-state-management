@@ -17,4 +17,4 @@ const Home: React.FC<IHome> = ({ incidents }) => (
   </div>
 )
 
-export default Home;
+export default Home
