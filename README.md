@@ -2,7 +2,7 @@
 
 This app is build:
 
-- React + ReactDOM (16.8.4)
+- React + ReactDOM
 - Typescript (with TSLint setting)
 - Prettier + tslint-config-prettier
 - Test configuration using Jest and [react-testing-library](https://github.com/kentcdodds/react-testing-library)

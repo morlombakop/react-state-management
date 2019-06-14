@@ -16,8 +16,8 @@ export const assignees = Array.from<string, string>(
   () => `${name.firstName()} ${name.lastName()}`
 )
 
-// Mock an array of 5 Incidents
-export const incidents = Array.from<string, IIncidentProps>({ length: 5 }, () => ({
+// Mock an array of 2 Incidents
+export const incidents = Array.from<string, IIncidentProps>({ length: 2 }, () => ({
   title: random.word(),
   assignee: assignees[random.number(4)],
   status: incidentStatuses[random.number(4)],

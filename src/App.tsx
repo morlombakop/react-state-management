@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import createStore, { StoreProvider } from '../lib/create-store'
 import incidentReducer from './reducers/IncidentReducer'
 import { incidents } from './config/fixtures'
-import CreateIncident from './pages/CreateIncident'
-import Home from './pages/Home'
+import CreateIncident from './pages/CreateIncidentContainer'
+import Home from './pages/HomeContainer'
 import Header from './components/Header'
 
 const App: React.FC = () => {

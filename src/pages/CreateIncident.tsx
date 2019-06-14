@@ -1,16 +1,12 @@
 import * as React from 'react'
 import styled from 'styled-components'
-import { withRouter } from 'react-router-dom'
-
 import SelectOption from '../components/SelectOption'
 import TextBox from '../components/TextBox'
-import { IIncidentProps, IncidentAction, ICreateIncident } from '../types/PropTypes'
+import { IIncidentProps, ICreateIncident } from '../types/PropTypes'
 import { incidentStatuses, assignees } from '../config/fixtures'
-// @ts-ignore
-import { connect } from '../../lib/create-store'
 
 const Fieldset = styled.fieldset`
-  padding: 15px;
+  padding: 0 15px;
   border-width: 0;
   & > * {
     margin: 15px 0;
@@ -80,26 +76,16 @@ class CreateIncident extends React.PureComponent<ICreateIncident, IIncidentProps
             error="Title is required "
             options={incidentStatuses}
           />
-          <span>
             <input
               value="Create"
               disabled={!this.isValid()}
               type="submit"
               title="Create Incident"
             />
-          </span>
         </Fieldset>
       </form>
     )
   }
 }
 
-const mapDispatchToProps = (dispatch: React.Dispatch<IncidentAction>) => ({
-  dispatchCreateIncident: (incident: IIncidentProps) =>
-    dispatch({ incident, type: 'ADD_INCIDENTS' }),
-})
-
-export default connect(
-  undefined,
-  mapDispatchToProps
-)(withRouter(CreateIncident))
+export default CreateIncident;

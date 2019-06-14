@@ -1,9 +1,7 @@
 import * as React from 'react'
 import { random } from 'faker'
 import Incident from '../components/Incident'
-// @ts-ignore
-import { connect } from '../../lib/create-store'
-import { IIncidentProps, IHome } from '../types/PropTypes'
+import { IHome } from '../types/PropTypes'
 
 const Home: React.FC<IHome> = ({ incidents }) => (
   <div className="wrapper">
@@ -18,5 +16,4 @@ const Home: React.FC<IHome> = ({ incidents }) => (
   </div>
 )
 
-const mapStateToProps = (state: IIncidentProps[]) => ({ incidents: state })
-export default connect(mapStateToProps)(Home)
+export default Home;
