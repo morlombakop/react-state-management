@@ -1,6 +1,36 @@
 import * as React from 'react'
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { ISelectOptionProps } from '../types/PropTypes'
+
+const SelectContainer = styled.div`
+  box-sizing: border-box;
+  select {
+    display: inline-block;
+    width: 100%;
+    padding: 0.5rem 1.75rem 0.5rem 0.75rem;
+    vertical-align: middle;
+    border: 1px solid #ced4da;
+    border-radius: 0;
+    font-size: 1rem;
+    background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e")
+      no-repeat right 0.75rem center/8px 10px;
+    &:required {
+      border: 1px solid red;
+    }
+  }
+  select,
+  option {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+  span {
+    color: red;
+    font-size: 0.8rem;
+  }
+  strong {
+    font-size: 0.85rem;
+  }
+`
 
 const SelectOption: React.FC<ISelectOptionProps> = ({
   onChange,
@@ -10,44 +40,20 @@ const SelectOption: React.FC<ISelectOptionProps> = ({
   error,
   options,
 }) => {
-  const isValid = (currentValue: string) => currentValue && currentValue.length
-  const baseHandler = (inputValue: string) => {
-    if (isValid(inputValue)) {
-      onChange(inputValue, name)
-    }
-  }
+  const [isTouched, setTouched] = React.useState<boolean>(false)
+
+  const isInvalid = () => isTouched && value.length < 5
+
+  const baseHandler = (inputValue: string) => onChange(inputValue, name)
 
   const handleChange = ({ target }: React.ChangeEvent<HTMLSelectElement>) =>
     baseHandler(target.value)
-  const handleLoseFocus = ({ target }: React.FocusEvent<HTMLSelectElement>) =>
+  const handleLoseFocus = ({ target }: React.FocusEvent<HTMLSelectElement>) => {
+    if (!isTouched) {
+      setTouched(true)
+    }
     baseHandler(target.value)
-
-  const SelectContainer = styled.div`
-    box-sizing: border-box;
-    select {
-      display: inline-block;
-      width: 100%;
-      padding: 0.5rem 1.75rem 0.5rem 0.75rem;
-      vertical-align: middle;
-      border: 1px solid #ced4da;
-      font-size: 1rem;
-      background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e")
-        no-repeat right 0.75rem center/8px 10px;
-      ${!isValid(value) &&
-        css`
-          border: 1px solid red;
-        `}
-    }
-    select,
-    option {
-      -webkit-appearance: none;
-      -moz-appearance: none;
-    }
-    span {
-      color: red;
-      font-size: 0.8rem;
-    }
-  `
+  }
 
   return (
     <SelectContainer>
@@ -56,6 +62,7 @@ const SelectOption: React.FC<ISelectOptionProps> = ({
         value={value}
         name={name}
         data-testid="select-option"
+        required={isInvalid()}
         onChange={handleChange}
         onBlur={handleLoseFocus}
       >
@@ -66,7 +73,7 @@ const SelectOption: React.FC<ISelectOptionProps> = ({
           <option key={value}>{value}</option>
         ))}
       </select>
-      {!isValid(value) && <span>{error}</span>}
+      {isInvalid() && <span>{error}</span>}
     </SelectContainer>
   )
 }

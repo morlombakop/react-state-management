@@ -13,15 +13,15 @@ describe('CreateIncident form component tests', () => {
     incidents,
   }
   const { getByTestId } = render(<Home {...props} />)
-  const IncidentContainer = getByTestId('home-container')
-  const IncidentListChildren = IncidentContainer.children
+  const container = getByTestId('home-container')
+  const containerChildren = container.children
 
   test('CreateIncident form component rendered correctly', () => {
-    expect(IncidentContainer).toBeInstanceOf(HTMLDivElement)
-    expect(IncidentContainer.classList.contains('wrapper')).toEqual(true)
-    expect(IncidentContainer.childElementCount).toBe(3)
-    expect(IncidentListChildren.item(0)).toHaveTextContent('Incident Lists')
-    expect(IncidentListChildren.item(1)).toBeInstanceOf(HTMLDivElement)
-    expect(IncidentListChildren.item(2)).toBeInstanceOf(HTMLDivElement)
+    expect(container).toBeInstanceOf(HTMLDivElement)
+    expect(container.classList.contains('wrapper')).toEqual(true)
+    expect(container.childElementCount).toBe(3)
+    expect(container.querySelector('h1')).toHaveTextContent('Incident Lists')
+    expect(containerChildren.item(1)).toBeInstanceOf(HTMLDivElement)
+    expect(containerChildren.item(2)).toBeInstanceOf(HTMLDivElement)
   })
 })

@@ -1,69 +1,112 @@
-import { cleanup, render, fireEvent } from "@testing-library/react";
+import { cleanup, fireEvent, render } from "@testing-library/react";
+import { random } from "faker";
 import "jest-dom/extend-expect";
 import "jest-styled-components";
 import * as React from "react";
+import { ITextBoxPops } from "../../types/PropTypes";
 import TextBox from "../TextBox";
-import { random } from "faker";
 
 afterEach(cleanup);
 
-describe("Input textbox component tests", () => {
-  const props = {
+describe("Textbox component tests", () => {
+  const props: ITextBoxPops = {
     onChange: (value: string, name: string) => {},
-    placeholder: "Enter title",
+    placeholder: random.words(3),
     value: "",
-    name: "title",
-    label: "Textbox Title",
-    error: "Title is required and must be at least 5 characters"
+    name: random.word(),
+    label:  random.words(2),
+    error:  random.words(5),
   };
 
-  const { getByTestId } = render(<TextBox {...props} />);
-  const InputTextbox = getByTestId("input-text-box");
-  const InputTextboxChildren = InputTextbox.children;
-  const inputEl = InputTextboxChildren.item(1);
+  const setUp = (componentProps = props) => {
+    const { getByTestId} = render(<TextBox {...componentProps} />);
+    const container = getByTestId("input-text-container");
+    const inputText = container.querySelector('input')
 
-  test("Input textbox rendered correctly", () => {
-    expect(InputTextbox).toBeInstanceOf(HTMLLabelElement);
-    expect(InputTextbox.childElementCount).toBe(3);
-    expect(InputTextboxChildren.item(0)).toHaveTextContent("Textbox Title");
-    expect(inputEl).toBeInstanceOf(HTMLInputElement);
-    expect(InputTextboxChildren.item(2)).toHaveTextContent(
-      "Title is required and must be at least 5 characters"
-    );
+    return { container, inputText }
+  }
+ 
+  test("Textbox renders correctly", () => {
+    const { container, inputText } = setUp()
+    expect(container).toBeInstanceOf(HTMLLabelElement);
+    expect(container.childElementCount).toBe(2);
+
+    const titleEl = container.querySelector('strong')
+    expect(titleEl).toHaveTextContent(props.label);
+    expect(titleEl).toHaveStyle(`
+      font-size: 0.85rem;
+    `);
+
+    expect(inputText).toHaveAttribute('name', props.name)
+    expect(inputText).toHaveValue(props.value)
+    expect(inputText).toHaveAttribute('placeHolder', props.placeholder)
   });
 
-  test("Input textbox styles rendered correctly", () => {
-    expect(InputTextbox).toHaveStyle(`
+  test("Textbox items have correct styles", () => {
+    const { container, inputText } = setUp()
+    expect(container).toHaveStyle(`
       display: flex;
       width: 100%;
       flex-direction: column;
       background: #ffffff;
       box-sizing: border-box;
     `);
-    expect(InputTextboxChildren.item(1)).toHaveStyle(`
+    expect(inputText).toHaveStyle(`
       padding: 0.5rem 0.75rem;
-      border: 1px solid red;
-      border-radius: 0.25rem;
+      border: 1px solid #ced4da;
       font-size: 1rem;
-    `);
-    expect(InputTextboxChildren.item(2)).toHaveStyle(`
-      color: red;
-    `);
+    `)
   });
 
-  test("Onchange is called appropriate param when input value change", () => {
-    const spy = jest.spyOn(props, "onChange");
-    const value = random.word();
-    fireEvent.change(inputEl!, { target: { value } });
+  test("TextBox should call onChange function on change event", () => {
+    const spy = jest.spyOn(props, "onChange")
+    const value = random.word()
+    const { inputText } = setUp()
+
+    fireEvent.change(inputText!, { target: { value } });
     expect(spy).toHaveBeenCalled();
     expect(spy).toHaveBeenCalledTimes(1);
     expect(spy).toHaveBeenCalledWith(value, props.name);
   });
 
-  test("Onchange is called appropriate param when input value change", () => {
-    const spy = jest.spyOn(props, "onChange");
-    // const value = random.word()
-    fireEvent.focusOut(inputEl!);
-    expect(spy).not.toHaveBeenCalled();
+  test("TextBox should call onChange on focus lost event", () => {
+    const spy = jest.spyOn(props, "onChange")
+    const { inputText } = setUp()
+
+    fireEvent.blur(inputText!);
+    expect(spy).toHaveBeenCalled();
+    expect(spy).toHaveBeenCalledTimes(2);
+    expect(spy).toHaveBeenCalledWith(props.value, props.name);
+  });
+
+  test("TextBox should display errors", () => {
+    const { container, inputText } = setUp()
+    fireEvent.blur(inputText!);
+    const errorEl = container.querySelector('span')
+
+    expect(container.childElementCount).toBe(3)
+    expect(errorEl).toHaveTextContent(props.error)
+    expect(inputText).toHaveStyle(`
+      padding: 0.5rem 0.75rem;
+      border: 1px solid red;
+      font-size: 1rem;
+    `)
+    expect(errorEl).toHaveStyle(`
+      color: red;
+      font-size: 0.8rem;
+    `)
+  });
+
+  test("TextBox should not display errors", () => {
+    const componentProps = { ...props, value: 'Hello World'}
+    const { container, inputText } = setUp(componentProps)
+    fireEvent.blur(inputText!);
+
+    expect(container.childElementCount).toBe(2)
+    expect(inputText).toHaveStyle(`
+      padding: 0.5rem 0.75rem;
+      border: 1px solid #ced4da;
+      font-size: 1rem;
+    `)
   });
 });

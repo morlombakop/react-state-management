@@ -13,27 +13,30 @@ describe('Header component tests', () => {
       <Header />
     </BrowserRouter>
   )
-  const HeaderContainer = getByTestId('header-container')
-  const HeaderFirstChild = HeaderContainer.firstChild || new HTMLElement()
-  const HomeLink = HeaderFirstChild.firstChild
-  const CreateLink = HeaderFirstChild.lastChild
+  const container = getByTestId('header-container')
+  const ulEl = container.querySelector('ul')
+  const listElements = container.querySelectorAll('li')
 
-  test('Header component rendered correctly', () => {
-    expect(HeaderFirstChild).toBeInstanceOf(HTMLUListElement)
-    expect(HomeLink).toBeInstanceOf(HTMLLIElement)
-    expect(CreateLink).toBeInstanceOf(HTMLLIElement)
+  test('Header component renders correctly', () => {
+    expect(ulEl).not.toEqual(null)
+    listElements.forEach(element => {
+      expect(element).not.toEqual(null)
+      expect(element).toHaveStyle('display: inline;')
+    })
   })
 
-  test('Header component styles rendered correctly', () => {
-    expect(HeaderContainer).toHaveStyle(`
+  test('Header component styles renders correctly', () => {
+    expect(container).toHaveStyle(`
       width: 100%;
       padding: 15px 0;
       background-color: #444444;
     `)
-    expect(HeaderContainer.getElementsByTagName('a').item(0)).toHaveStyle(`
+    container.querySelectorAll('a').forEach(element => {
+      expect(element).toHaveStyle(`
       padding: 0px 10px;
       text-decoration: none;
       color: #d0d0d0;
     `)
+    })
   })
 })

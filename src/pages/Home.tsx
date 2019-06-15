@@ -1,5 +1,5 @@
-import * as React from 'react'
 import { random } from 'faker'
+import * as React from 'react'
 import Incident from '../components/Incident'
 import { IHome } from '../types/PropTypes'
 
