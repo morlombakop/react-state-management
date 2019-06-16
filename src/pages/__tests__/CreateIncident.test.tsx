@@ -118,13 +118,12 @@ describe('CreateIncident component tests', () => {
 
     fireEvent.click(submitBtn)
 
-    expect(dispatchSpy).toBeCalledTimes(1)
     expect(dispatchSpy).toHaveBeenCalledWith({
       title,
       assignee,
       status,
     })
-    expect(navigationSpy).toBeCalledTimes(1)
+    expect(navigationSpy).toBeCalledWith('/')
   })
 
   test('CreateIncident form submit event should create an incident', () => {
@@ -143,12 +142,11 @@ describe('CreateIncident component tests', () => {
 
     fireEvent.submit(form)
 
-    expect(dispatchSpy).toBeCalled()
     expect(dispatchSpy).toHaveBeenCalledWith({
       title,
       assignee,
       status,
     })
-    expect(navigationSpy).toBeCalled()
+    expect(navigationSpy).toBeCalledWith('/')
   })
 })
